@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Zajecia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services" style="margin-top:150px; margin-block:150px">
+    <div class="container">
+        @await Html.PartialAsync("ZajeciaPodstawowe",(IEnumerable<PrzedszkoleData.Data.CMS.ZajeciaPodstawowe>)ViewBag.ModelZajeciaPodstawowe)
+        @await Html.PartialAsync("ZajeciaDodatkowe",(IEnumerable<PrzedszkoleData.Data.CMS.ZajeciaDodatkowe>)ViewBag.ModelZajeciaDodatkowe)
+
+    </div>
+</section><!-- End Services Section -->

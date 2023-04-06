@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.ZajeciaPodstawowe>
+
+<div class="container">
+
+    <div class="section-title" data-aos="zoom-out">
+        <h2>Zajęcia</h2>
+        <p>Zajęcia w ramach czesnego</p>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 mt-5 mt-lg-0 ">
+                <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="200">
+                    <div class="icon"><i class="bi bi-card-checklist" style="color: #3fcdc7;"></i></div>
+                    <h4 class="title"><a href="">@item.Tytul</a></h4>
+                    <p class="description">@item.Opis</p>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

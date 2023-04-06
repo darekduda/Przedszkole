@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Adres>
+
+@foreach (var item in Model)
+{
+    <h4>Lokalizacja:</h4>
+    <p>@item.KodPocztowy @item.Miasto ul. @item.Ulica @item.NumerBudynku</p>
+}
+
+

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Kadra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Team Section ======= -->
+<section id="team" class="team" style="margin-top: 150px">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>Kadra</h2>
+            <p>Nasz kadra:</p>
+        </div>
+
+        <div class="row">
+
+            @await Html.PartialAsync("Personel",(IEnumerable<PrzedszkoleData.Data.CMS.Personel>)ViewBag.ModelPersonel)
+
+
+        </div>
+
+    </div>
+</section><!-- End Team Section -->

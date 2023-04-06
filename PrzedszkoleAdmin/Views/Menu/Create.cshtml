@@ -1,0 +1,78 @@
+﻿@model PrzedszkoleData.Data.CMS.Menu
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Menu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TytulSniadania" class="control-label"></label>
+                <input asp-for="TytulSniadania" class="form-control" />
+                <span asp-validation-for="TytulSniadania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisSniadania" class="control-label"></label>
+                <input asp-for="OpisSniadania" class="form-control" />
+                <span asp-validation-for="OpisSniadania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TytulPierwszegoDania" class="control-label"></label>
+                <input asp-for="TytulPierwszegoDania" class="form-control" />
+                <span asp-validation-for="TytulPierwszegoDania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisPierwszegoDania" class="control-label"></label>
+                <input asp-for="OpisPierwszegoDania" class="form-control" />
+                <span asp-validation-for="OpisPierwszegoDania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TytulDrugiegoDania" class="control-label"></label>
+                <input asp-for="TytulDrugiegoDania" class="form-control" />
+                <span asp-validation-for="TytulDrugiegoDania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisDrugiegoDania" class="control-label"></label>
+                <input asp-for="OpisDrugiegoDania" class="form-control" />
+                <span asp-validation-for="OpisDrugiegoDania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TytulPodwieczorku" class="control-label"></label>
+                <input asp-for="TytulPodwieczorku" class="form-control" />
+                <span asp-validation-for="TytulPodwieczorku" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisPodwieczorku" class="control-label"></label>
+                <input asp-for="OpisPodwieczorku" class="form-control" />
+                <span asp-validation-for="OpisPodwieczorku" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dzien" class="control-label"></label>
+                <input asp-for="Dzien" class="form-control" />
+                <span asp-validation-for="Dzien" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyAktywny" /> @Html.DisplayNameFor(model => model.CzyAktywny)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

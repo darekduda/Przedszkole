@@ -1,0 +1,24 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.ZajeciaDodatkowe>
+
+<div class="container" style="margin-top:100px">
+
+    <div class="section-title" data-aos="zoom-out">
+        <h2>Zajęcia</h2>
+        <p>Zajęcia dodatkowo płatne</p>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 mt-5 mt-md-0" style="margin-bottom:40px">
+                <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
+                    <div class="icon"><i class="bi bi-book" style="color: #e9bf06;"></i></div>
+                    <h4 class="title"><a href="">@item.Tytul</a></h4>
+                    <p class="description">@item.Opis</p>
+                    <p class="description"><i>Cena za godzine zajęć: </i>@item.Cena</p>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

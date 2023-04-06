@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Cennik";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Pricing Section ======= -->
+<section id="pricing" class="pricing" style="margin-top:150px; margin-block:150px">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>Cennik</h2>
+            <p>Ceny obowiązujące w przedszkolu:</p>
+        </div>
+        @await Html.PartialAsync("CennikZaPrzedszkole",(IEnumerable<PrzedszkoleData.Data.CMS.Cennik>)ViewBag.ModelCennik)
+
+    </div>
+</section><!-- End Pricing Section -->

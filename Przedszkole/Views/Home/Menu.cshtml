@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Menu>
+
+@{
+    var dzis = DateTime.Today.Date;
+    var dzisiejszaData = new DateTime(dzis.Year, dzis.Month, dzis.Day);
+    var dzisiejszeMenu = Model.FirstOrDefault(m => m.Dzien == dzisiejszaData);
+}
+
+@if (dzisiejszeMenu == null)
+{
+    <p>Menu na dzisiaj nie zostało jeszcze opublikowane.</p>
+}
+else
+{
+    <div class="tab-pane active show" id="tab-1" style="margin-top:50px">
+        <div class="row">
+            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <h3>Jadłospis na dany dzień: @dzis.ToShortDateString()</h3>
+                <ul>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.TytulSniadania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.OpisSniadania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.TytulPierwszegoDania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.OpisPierwszegoDania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.TytulDrugiegoDania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.OpisDrugiegoDania</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.TytulPodwieczorku</li>
+                    <li><i class="ri-check-double-line"></i>@dzisiejszeMenu.OpisPodwieczorku</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="~/assets/img/features-1.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+}

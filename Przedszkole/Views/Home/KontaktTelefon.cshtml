@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Kontakt>
+
+    @foreach(var item in Model)
+    {
+    <h4>@item.NazwaTelefonu</h4>
+    <p style="font-size: 14px;">@item.NumerTelefonu</p>
+    <br />
+    }

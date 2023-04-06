@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.ONas>
+<div class="row">
+    <div class="col-lg-6">
+        @for (int i = 0; i < Model.Count(); i += 2)
+        {
+            <div style="margin-block:40px">
+                    <p>@Model.ElementAt(i).Tytul</p>
+                    <p>@Model.ElementAt(i).Opis</p>
+                </div>
+        }
+    </div>
+    <div class="col-lg-6">
+        @for (int i = 1; i < Model.Count(); i += 2)
+        {
+                <div style="margin-block:40px">
+                    <p>@Model.ElementAt(i).Tytul</p>
+                    <p>@Model.ElementAt(i).Opis</p>
+                </div>
+        }
+    </div>
+</div>
+@*@for (int i = 0; i < Model.Count(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            <div class="col-lg-6">
+                <p>@Model.ElementAt(i).Tytul</p>
+                <p>@Model.ElementAt(i).Opis</p>
+            </div>
+        } else
+        {
+            <div class="col-lg-6 ">
+                <p>@Model.ElementAt(i).Tytul</p>
+                <p>@Model.ElementAt(i).Opis</p>
+            </div>
+        }
+    }*@

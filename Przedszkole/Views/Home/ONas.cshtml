@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "O Nas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about" style="margin-top: 150px">
+    <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+            <h2>About</h2>
+            <p>Who we are</p>
+        </div>
+        @await Html.PartialAsync("ONasInformacje",(IEnumerable<PrzedszkoleData.Data.CMS.ONas>)ViewBag.ModelONas)
+
+        
+
+    </div>
+</section><!-- End About Section -->
+<!-- ======= Features Section ======= -->
+<section id="features" class="features">
+    <div class="container">
+        <ul class="nav nav-tabs row d-flex">
+            <li class="nav-item col-3" data-aos="zoom-in">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
+                    <i class="ri-gps-line"></i>
+                    <h4 class="d-none d-lg-block">Plan dnia:</h4>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up">
+            @await Html.PartialAsync("HarmnogramDzienny",(IEnumerable<PrzedszkoleData.Data.CMS.HarmonogramDzienny>)ViewBag.ModelHarmnogramDzienny)
+        </div>
+
+    </div>
+    <div class="container">
+        <ul class="nav nav-tabs row d-flex">
+            <li class="nav-item col-3" data-aos="zoom-in">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-2">
+                    <i class="ri-body-scan-line"></i>
+                    <h4 class="d-none d-lg-block">Menu dzisiejsze</h4>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up">
+            @await Html.PartialAsync("Menu",(IEnumerable<PrzedszkoleData.Data.CMS.Menu>)ViewBag.ModelMenu)
+        </div>
+
+    </div>
+</section><!-- End Features Section -->

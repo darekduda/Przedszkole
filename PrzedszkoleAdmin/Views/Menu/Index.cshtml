@@ -1,0 +1,89 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Menu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TytulSniadania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpisSniadania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TytulPierwszegoDania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpisPierwszegoDania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TytulDrugiegoDania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpisDrugiegoDania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TytulPodwieczorku)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpisPodwieczorku)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dzien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzyAktywny)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TytulSniadania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpisSniadania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TytulPierwszegoDania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpisPierwszegoDania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TytulDrugiegoDania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpisDrugiegoDania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TytulPodwieczorku)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpisPodwieczorku)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dzien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzyAktywny)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

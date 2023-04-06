@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Kontakt>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TytułKontakt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumerTelefonu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NazwaTelefonu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzyAktywny)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TytułKontakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumerTelefonu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazwaTelefonu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzyAktywny)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
