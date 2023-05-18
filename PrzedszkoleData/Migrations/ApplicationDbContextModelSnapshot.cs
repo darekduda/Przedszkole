@@ -17,7 +17,7 @@ namespace PrzedszkoleData.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -340,6 +340,27 @@ namespace PrzedszkoleData.Migrations
                     b.ToTable("GodzinyOtwarcia");
                 });
 
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Grupa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Grupa");
+                });
+
             modelBuilder.Entity("PrzedszkoleData.Data.CMS.HarmonogramDzienny", b =>
                 {
                     b.Property<int>("Id")
@@ -490,6 +511,27 @@ namespace PrzedszkoleData.Migrations
                     b.ToTable("Menu");
                 });
 
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Nazwa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Tytul")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Nazwa");
+                });
+
             modelBuilder.Entity("PrzedszkoleData.Data.CMS.ONas", b =>
                 {
                     b.Property<int>("Id")
@@ -514,6 +556,65 @@ namespace PrzedszkoleData.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ONas");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Opis", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Tytul")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Opis");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Parametr", b =>
+                {
+                    b.Property<int>("IdParametru")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdParametru"));
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Opis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Wartosc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdParametru");
+
+                    b.ToTable("Parametr");
                 });
 
             modelBuilder.Entity("PrzedszkoleData.Data.CMS.Personel", b =>
@@ -545,6 +646,27 @@ namespace PrzedszkoleData.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Personel");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Stopka", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Tytul")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stopka");
                 });
 
             modelBuilder.Entity("PrzedszkoleData.Data.CMS.ZajeciaDodatkowe", b =>
@@ -603,6 +725,117 @@ namespace PrzedszkoleData.Migrations
                     b.ToTable("ZajeciaPodstawowe");
                 });
 
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Dziecko", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("CzyAktywny")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DataUrodzenia")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("GrupaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Imie")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Nazwisko")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("GrupaId");
+
+                    b.ToTable("Dziecko");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.DzieckoZajeciaDodatkowe", b =>
+                {
+                    b.Property<int>("DzieckoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZajeciaDodatkoweId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("DzieckoId", "ZajeciaDodatkoweId");
+
+                    b.HasIndex("ZajeciaDodatkoweId");
+
+                    b.ToTable("DzieckoZajeciaDodatkowe");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Naleznosci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DzieckoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Kwota")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Miesiac")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rok")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DzieckoId");
+
+                    b.ToTable("Naleznosci");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Obecnosc", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CzyObecne")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DzieckoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DzieckoId");
+
+                    b.ToTable("Obecnosc");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -652,6 +885,75 @@ namespace PrzedszkoleData.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Dziecko", b =>
+                {
+                    b.HasOne("PrzedszkoleData.Data.Account.ApplicationUser", null)
+                        .WithMany("Dzieci")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("PrzedszkoleData.Data.CMS.Grupa", "Grupa")
+                        .WithMany("Dziecko")
+                        .HasForeignKey("GrupaId");
+
+                    b.Navigation("Grupa");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.DzieckoZajeciaDodatkowe", b =>
+                {
+                    b.HasOne("PrzedszkoleData.Data.Manage.Dziecko", "Dziecko")
+                        .WithMany("ZajeciaDodatkowe")
+                        .HasForeignKey("DzieckoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PrzedszkoleData.Data.CMS.ZajeciaDodatkowe", "ZajeciaDodatkowe")
+                        .WithMany()
+                        .HasForeignKey("ZajeciaDodatkoweId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dziecko");
+
+                    b.Navigation("ZajeciaDodatkowe");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Naleznosci", b =>
+                {
+                    b.HasOne("PrzedszkoleData.Data.Manage.Dziecko", "Dziecko")
+                        .WithMany()
+                        .HasForeignKey("DzieckoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dziecko");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Obecnosc", b =>
+                {
+                    b.HasOne("PrzedszkoleData.Data.Manage.Dziecko", "Dziecko")
+                        .WithMany()
+                        .HasForeignKey("DzieckoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dziecko");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Account.ApplicationUser", b =>
+                {
+                    b.Navigation("Dzieci");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.CMS.Grupa", b =>
+                {
+                    b.Navigation("Dziecko");
+                });
+
+            modelBuilder.Entity("PrzedszkoleData.Data.Manage.Dziecko", b =>
+                {
+                    b.Navigation("ZajeciaDodatkowe");
                 });
 #pragma warning restore 612, 618
         }

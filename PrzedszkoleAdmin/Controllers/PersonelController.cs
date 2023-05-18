@@ -13,6 +13,7 @@ using PrzedszkoleData.Data;
 using PrzedszkoleData.Data.CMS;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
+using Microsoft.Extensions.Hosting;
 
 namespace PrzedszkoleAdmin.Controllers
 {
@@ -71,14 +72,19 @@ namespace PrzedszkoleAdmin.Controllers
                 {
                     var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(profilePicture.FileName)}";
                     var relativePath = Path.Combine("Data", "Personel", fileName);
-                    var filePath = Path.Combine(_webHostEnvironment.ContentRootPath, "..", "PrzedszkoleData", relativePath);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var absolutePath = Path.Combine(@"C:\Users\dariu\Desktop\Przedszkole\Przedszkole\Przedszkole\PrzedszkoleData", relativePath);
+                    using (var stream = new FileStream(absolutePath, FileMode.Create))
                     {
                         await profilePicture.CopyToAsync(stream);
                     }
 
                     personel.ProfilePicture = fileName;
+                    var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
+                    if (!allowedTypes.Contains(profilePicture.ContentType))
+                    {
+                        ModelState.AddModelError("profilePicture", "Nieprawidłowy format pliku");
+                        return View(personel);
+                    }
                 }
 
                 _context.Add(personel);
@@ -91,8 +97,8 @@ namespace PrzedszkoleAdmin.Controllers
         }
 
 
-        // GET: Personel/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+            // GET: Personel/Edit/5
+            public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Personel == null)
             {

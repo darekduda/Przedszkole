@@ -17,16 +17,66 @@ namespace Przedszkole.Controllers
 
         public void WywolajViewBagi()
         {
+            ViewBag.ModelOpis =
+                (
+                    from Opis in _context.Opis
+                    where Opis.CzyAktywny == true
+                    select Opis
+                ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
             ViewBag.ModelInformacje =
                 (
                     from Informacje in _context.Informacje
                     where Informacje.CzyAktywny == true
                     select Informacje
                 ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
+            ViewBag.ModelCennik =
+                (
+                    from Cennik in _context.Cennik
+                    where Cennik.CzyAktywny == true
+                    select Cennik
+                ).ToList();
+
         }
 
         public void WywolajViewBagiONas()
         {
+            ViewBag.ModelOpis =
+                (
+                    from Opis in _context.Opis
+                    where Opis.CzyAktywny == true
+                    select Opis
+                ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
             ViewBag.ModelONas =
                (
                    from ONas in _context.ONas
@@ -47,10 +97,33 @@ namespace Przedszkole.Controllers
                 where Menu.CzyAktywny == true && Menu.Dzien == DateTime.Today.Date
                 select Menu
             ).ToList();
+
+
         }
 
         public void WywolajViewBagiZajecia()
         {
+            ViewBag.ModelOpis =
+            (
+                from Opis in _context.Opis
+                where Opis.CzyAktywny == true
+                select Opis
+            ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
             ViewBag.ModelZajeciaDodatkowe =
                 (
                     from ZajeciaDodatkowe in _context.ZajeciaDodatkowe
@@ -63,10 +136,33 @@ namespace Przedszkole.Controllers
                     where ZajeciaPodstawowe.CzyAktywny == true
                     select ZajeciaPodstawowe
                 ).ToList();
+
+
         }
 
         public void WywolajViewBagiCennik()
         {
+            ViewBag.ModelOpis =
+                (
+                    from Opis in _context.Opis
+                    where Opis.CzyAktywny == true
+                    select Opis
+                ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
             ViewBag.ModelCennik =
                 (
                     from Cennik in _context.Cennik
@@ -74,10 +170,33 @@ namespace Przedszkole.Controllers
                     select Cennik
                 ).ToList();
 
+
+
         }
 
         public void WywolajViewBagiKontakt()
         {
+            ViewBag.ModelOpis =
+                (
+                    from Opis in _context.Opis
+                    where Opis.CzyAktywny == true
+                    select Opis
+                ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
             ViewBag.ModelKontakt =
                 (
                     from Kontakt in _context.Kontakt
@@ -91,15 +210,40 @@ namespace Przedszkole.Controllers
                     select Adres
                 ).ToList();
 
+
+
         }
 
         public void WywolajViewBagiPersonel()
         {
+            ViewBag.ModelOpis =
+                (
+                    from Opis in _context.Opis
+                    where Opis.CzyAktywny == true
+                    select Opis
+                ).ToList();
+
+            ViewBag.ModelStopka =
+                (
+                    from Stopka in _context.Stopka
+                    where Stopka.CzyAktywny == true
+                    select Stopka
+                ).ToList();
+
+            ViewBag.ModelNazwa =
+                (
+                    from Nazwa in _context.Nazwa
+                    where Nazwa.CzyAktywny == true
+                    select Nazwa
+                ).ToList();
+
             ViewBag.ModelPersonel =
                 (
                     from Personel in _context.Personel
                     select Personel
                 ).ToList();
+
+
 
         }
     }

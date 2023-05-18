@@ -34,7 +34,5 @@ namespace PrzedszkoleData.Data.CMS
         public IFormFile? ImageFile { get; set; }
         public string? ProfilePicture { get; set; }
 
-
-
     }
 }

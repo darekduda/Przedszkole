@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrzedszkoleData.Data.Manage;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,5 +31,6 @@ namespace PrzedszkoleData.Data.CMS
         [Required(ErrorMessage = "Zaznacz, czy ma być wyświetlony na stronie")]
         [Display(Name = "Czy widoczny?")]
         public bool CzyAktywny { get; set; }
+
     }
 }

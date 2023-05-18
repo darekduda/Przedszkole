@@ -83,6 +83,43 @@ namespace PrzedszkoleAdmin.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            return View(role);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            var result = await roleManager.DeleteAsync(role);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(role);
+        }
     }
 }
 

@@ -22,6 +22,11 @@ namespace PrzedszkoleAdmin.Controllers
             return View();
         }
 
+        public IActionResult Dziecko()
+        {
+            return View();
+        }
+
         public IActionResult Ogolne()
         {
             return View();

@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@model List<PrzedszkoleAdmin.Models.DzieckoZajeciaViewModel>
+
+<h1>Lista dzieci z przypisanymi zajęciami</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Zajęcia dodatkowe</th>
+            <th></th> <!-- Dodany nagłówek dla przycisku -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dziecko in Model)
+        {
+            <tr>
+                <td>@dziecko.Imie</td>
+                <td>@dziecko.Nazwisko</td>
+@*                <td>
+                    @foreach (var zajecie in dziecko.PrzypisaneZajecia)
+                    {
+                        <p>@zajecie.Tytul</p>
+                    }
+                </td>*@
+                <td>
+                    <a href="@Url.Action("PrzypiszZajeciaDodatkowe", "DzieckoZajeciaDodatkowe", new { dzieckoId = dziecko.DzieckoId })" class="btn btn-primary">Przypisz zajęcia</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

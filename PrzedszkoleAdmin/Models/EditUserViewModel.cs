@@ -12,5 +12,26 @@ namespace PrzedszkoleAdmin.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        public string Kraj { get; set; }
+
+        public string Wojewodztwo { get; set; }
+
+        public string Miasto { get; set; }
+
+        [Display(Name = "Postal Code")]
+        public string KodPocztowy { get; set; }
+
+        public string Ulica { get; set; }
+
+        [Display(Name = "House Number")]
+        public string NumerDomu { get; set; }
+
     }
 }

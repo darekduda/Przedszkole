@@ -54,6 +54,7 @@ namespace PrzedszkoleData.Data.CMS
 
         [Required(ErrorMessage = "Wpisz dzień w którym jest posiłek")]
         [Display(Name = "Dzień")]
+        [DataType(DataType.Date)]
         public DateTime? Dzien { get; set; }
 
         [Required(ErrorMessage = "Zaznacz, czy ma być wyświetlony na stronie")]

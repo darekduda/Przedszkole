@@ -1,0 +1,62 @@
+﻿@model PrzedszkoleAdmin.Models.NaleznoscViewModel
+
+<h2>Informacje o dziecku</h2>
+
+<div>
+    <h4>Imię: @Model.Dziecko.Imie</h4>
+    <h4>Nazwisko: @Model.Dziecko.Nazwisko</h4>
+    <h4>Grupa: @Model.Dziecko.Grupa?.Name</h4>
+</div>
+
+<h2>Wyliczenie należności</h2>
+
+@{
+    var currentYear = DateTime.Now.Year;
+    var currentMonth = DateTime.Now.Month;
+}
+
+@using (Html.BeginForm("Oplaty", "Dziecko", FormMethod.Get))
+{
+    <div>
+        <label for="rok">Rok:</label>
+        <select id="rok" name="rok">
+            @foreach (var year in new[] { currentYear, currentYear + 1, currentYear + 2 })
+            {
+                <option value="@year" selected="@(Model.Rok == year ? "selected" : null)">@year</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="miesiac">Miesiąc:</label>
+        <select id="miesiac" name="miesiac">
+            @foreach (var month in Enumerable.Range(1, 12))
+            {
+                <option value="@month" selected="@(Model.Miesiac == month ? "selected" : null)">@GetMonthName(month)</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Oblicz</button>
+}
+
+@using (Html.BeginForm("ZapiszNaleznosci", "Dziecko", FormMethod.Post))
+{
+    <div>
+        <h4>Dni obecnych: @Model.SumaObecnosci</h4>
+        <h4>Suma za wyżywienie: @Model.CenaObecnosci</h4>
+        <h4>Czesne: @Model.CenaDodatkowa</h4>
+        <h4>Należność: @Model.Naleznosc</h4>
+    </div>
+
+    <input type="hidden" name="dzieckoId" value="@Model.Dziecko.Id" />
+    <input type="hidden" name="rok" value="@Model.Rok" />
+    <input type="hidden" name="miesiac" value="@Model.Miesiac" />
+
+    <button type="submit">Zapisz</button>
+}
+
+@functions {
+    string GetMonthName(int month)
+    {
+        return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+    }
+}

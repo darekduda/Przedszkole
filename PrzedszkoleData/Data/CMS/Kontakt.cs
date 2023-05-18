@@ -13,7 +13,7 @@ namespace PrzedszkoleData.Data.CMS
         public int Id { get; set; }
 
         [MaxLength(20, ErrorMessage = "Nagłówek powinien zawierać maksymalnie 20 znaków")]
-        [Display(Name = "Nagłówek")]
+        [Display(Name = "Tytół")]
         public string? TytułKontakt { get; set; }
 
         [Required(ErrorMessage = "Wpisz numer telefonu")]

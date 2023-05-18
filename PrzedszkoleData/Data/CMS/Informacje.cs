@@ -14,7 +14,7 @@ namespace PrzedszkoleData.Data.CMS
 
         [Required(ErrorMessage = "Wpisz tytuł nagłówka")]
         [MaxLength(150, ErrorMessage = "Nagłówek powinien zawierać maksymalnie 150 znaków")]
-        [Display(Name = "Nagłówek")]
+        [Display(Name = "Tytół")]
         public string? Tytul { get; set; }
 
         [Required(ErrorMessage = "Wpisz opis")]

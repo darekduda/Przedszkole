@@ -22,7 +22,21 @@ namespace PrzedszkoleAdmin.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.ToListAsync();
-            return View(users);
+            var model = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                var userViewModel = new UserViewModel
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Role = roles.FirstOrDefault()
+                };
+                model.Add(userViewModel);
+            }
+            return View(model);
         }
 
         [HttpGet]

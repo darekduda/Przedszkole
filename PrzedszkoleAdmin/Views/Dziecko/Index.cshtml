@@ -1,0 +1,114 @@
+﻿@model IEnumerable<PrzedszkoleData.Data.Manage.Dziecko>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <button class="btn btn-primary">
+                        <a asp-action="Create" style="text-align:center; color:white;">Dodaj</a>
+                    </button>
+                </div>
+                <div class="col-sm-4" style="text-align:center">
+                    <h1>Dzieci</h1>
+                </div>
+                <div class="col-sm-4" style="text-align:right">
+                    <button class="btn btn-secondary" onclick="goBack()">Wróć</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="card">
+        <div class="card-body">
+            <br />
+            <br />
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Imie)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nazwisko)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataUrodzenia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CzyAktywny)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grupa)
+                        </th>
+                        <th style="width:250px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Imie)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nazwisko)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataUrodzenia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CzyAktywny)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grupa.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a asp-action="Oplaty" asp-route-id="@item.Id">Oplaty</a>
+                                <a asp-action="ListaObecnosci" asp-route-id="@item.Id">Obecnosc</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $('#example').DataTable({
+        language: {
+            search: "Wyszukaj",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            },
+            "zeroRecords": "Nie znaleziono pasujących rekordów",
+            "info": "Wyświetlono _START_ do _END_ z _TOTAL_ rekordów",
+            "infoEmpty": "Wyświetlono 0 rekordów",
+            "infoFiltered": "(filtrowano z _MAX_ rekordów)",
+            info: "Wyświetl _START_ do _END_ z _TOTAL_ elementów",
+            lengthMenu: "Wyświetl _MENU_ elementów"
+        }
+    });
+</script>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

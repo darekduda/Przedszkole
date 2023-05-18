@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PrzedszkoleData.Data.Account;
 using PrzedszkoleAdmin.Models;
+using PrzedszkoleData.Data;
 
 namespace PrzedszkoleAdmin.Controllers
 {
@@ -14,12 +15,15 @@ namespace PrzedszkoleAdmin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
 
-        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+
+        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -62,7 +66,15 @@ namespace PrzedszkoleAdmin.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Kraj = user.Kraj,
+                Wojewodztwo = user.Wojewodztwo,
+                Miasto = user.Miasto,
+                KodPocztowy = user.KodPocztowy,
+                Ulica = user.Ulica,
+                NumerDomu = user.NumerDomu,
             };
 
             return View(model);
@@ -78,6 +90,14 @@ namespace PrzedszkoleAdmin.Controllers
                 {
                     user.UserName = model.UserName;
                     user.Email = model.Email;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.Kraj = model.Kraj;
+                    user.Wojewodztwo = model.Wojewodztwo;
+                    user.Miasto = model.Miasto;
+                    user.KodPocztowy = model.KodPocztowy;
+                    user.Ulica = model.Ulica;
+                    user.NumerDomu = model.NumerDomu;
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
@@ -161,6 +181,62 @@ namespace PrzedszkoleAdmin.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignChildren(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var children = await _context.Dziecko.ToListAsync();
+
+            var model = new AssignChildrenViewModel
+            {
+                UserId = id,
+                UserName = user.UserName,
+                Children = children.Select(c => new SelectListItem
+                {
+                    Text = $"{c.Imie} {c.Nazwisko}",
+                    Value = c.Id.ToString()
+                })
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignChildren(AssignChildrenViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var childrenIds = model.SelectedChildrenIds?.Select(int.Parse) ?? Enumerable.Empty<int>();
+            var children = await _context.Dziecko.Where(c => childrenIds.Contains(c.Id)).ToListAsync();
+
+            user.Dzieci = children;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
 
     }
 }

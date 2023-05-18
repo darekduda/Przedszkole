@@ -1,0 +1,19 @@
+﻿@model PrzedszkoleAdmin.Models.AssignChildrenViewModel
+
+<h1>Przypisz Dzieci do Użytkownika</h1>
+
+<h3>Użytkownik: @Model.UserName</h3>
+
+<form method="post" action="@Url.Action("AssignChildren", new { id = Model.UserId })">
+    <div>
+        <label for="selectedChildrenIds">Dzieci:</label>
+        <select multiple name="selectedChildrenIds" id="selectedChildrenIds">
+            @foreach (var child in Model.Children)
+            {
+                <option value="@child.Value">@child.Text</option>
+            }
+        </select>
+
+        <button type="submit">Przypisz</button>
+    </div>
+</form>

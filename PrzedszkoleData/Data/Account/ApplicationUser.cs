@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PrzedszkoleData.Data.Manage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,7 @@ namespace PrzedszkoleData.Data.Account
         public string? Ulica { get; set; }
         public string? NumerDomu { get; set; }
         public string? ProfilePicture { get; set; }
+        public ICollection<Dziecko> Dzieci { get; set; }
+
     }
 }

@@ -1,0 +1,56 @@
+﻿@model ObecnoscViewModel
+@{
+    ViewData["Title"] = "Obecność";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-10" style="text-align:center">
+                    <h1>Obesność:</h1>
+                </div>
+                <div class="col-sm-2" style="text-align:right">
+                    <button class="btn btn-secondary" onclick="goBack()">Wróć</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        Data:
+        <form method="get">
+            <input type="date" name="data" value="@Model.Data.ToString("yyyy-MM-dd")" onchange="this.form.submit()" />
+        </form>
+    </p>
+
+    <form method="post" action="@Url.Action("Zapisz")">
+        <input type="hidden" name="data" value="@Model.Data.ToString("yyyy-MM-dd")" />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nazwisko</th>
+                    <th>Imię</th>
+                    <th>Grupa</th>
+                    <th>Obecność</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dziecko in Model.Dzieci)
+                {
+                    <tr>
+                        <td>@dziecko.Nazwisko</td>
+                        <td>@dziecko.Imie</td>
+                        <td>@(dziecko.Grupa != null ? dziecko.Grupa.Name : "-")</td>
+                        <td>
+                            <input type="checkbox" name="obecnosci[@dziecko.Id]" value="true" @(Model.Obecnosci.ContainsKey(dziecko.Id) && Model.Obecnosci[dziecko.Id] ? "checked" : "") />
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit">Zapisz</button>
+    </form>
+</div>

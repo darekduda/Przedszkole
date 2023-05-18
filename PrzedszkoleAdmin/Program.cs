@@ -35,6 +35,8 @@ else
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles(); // Dodanie middleware UseStaticFiles
@@ -45,7 +47,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

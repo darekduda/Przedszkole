@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PrzedszkoleData.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -109,6 +109,20 @@ namespace PrzedszkoleData.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Grupa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grupa", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HarmonogramDzienny",
                 columns: table => new
                 {
@@ -176,6 +190,80 @@ namespace PrzedszkoleData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Menu", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Nazwa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tytul = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Nazwa", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ONas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tytul = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Opis = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ONas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Opis",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tytul = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Nazwa = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Opis", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Personel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Stanowsiko = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Personel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stopka",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tytul = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stopka", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -315,6 +403,28 @@ namespace PrzedszkoleData.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Dziecko",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Imie = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Nazwisko = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DataUrodzenia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false),
+                    GrupaId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dziecko", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dziecko_Grupa_GrupaId",
+                        column: x => x.GrupaId,
+                        principalTable: "Grupa",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -353,6 +463,11 @@ namespace PrzedszkoleData.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dziecko_GrupaId",
+                table: "Dziecko",
+                column: "GrupaId");
         }
 
         /// <inheritdoc />
@@ -380,6 +495,9 @@ namespace PrzedszkoleData.Migrations
                 name: "Cennik");
 
             migrationBuilder.DropTable(
+                name: "Dziecko");
+
+            migrationBuilder.DropTable(
                 name: "GodzinyOtwarcia");
 
             migrationBuilder.DropTable(
@@ -395,6 +513,21 @@ namespace PrzedszkoleData.Migrations
                 name: "Menu");
 
             migrationBuilder.DropTable(
+                name: "Nazwa");
+
+            migrationBuilder.DropTable(
+                name: "ONas");
+
+            migrationBuilder.DropTable(
+                name: "Opis");
+
+            migrationBuilder.DropTable(
+                name: "Personel");
+
+            migrationBuilder.DropTable(
+                name: "Stopka");
+
+            migrationBuilder.DropTable(
                 name: "ZajeciaDodatkowe");
 
             migrationBuilder.DropTable(
@@ -405,6 +538,9 @@ namespace PrzedszkoleData.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Grupa");
         }
     }
 }

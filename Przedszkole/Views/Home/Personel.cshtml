@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<PrzedszkoleData.Data.CMS.Personel>
-@using PrzedszkoleData.Data;
-
+@*@using PrzedszkoleData.Data;
+*@
 @foreach (var item in Model)
 {
     <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
         <div class="member" data-aos="fade-up">
             <div class="member-img">
-                <img src="~/../PrzedszkoleData/Data/Personel/@item.ProfilePicture" alt="@item.ProfilePicture">
+                <img src="C:\Users\dariu\Desktop\Przedszkole\Przedszkole\Przedszkole\PrzedszkoleData\Data\Personel\@item.ProfilePicture" alt="@item.ProfilePicture">
             </div>
             <div class="member-info">
                 <h4>@item.FirstName @item.LastName</h4>

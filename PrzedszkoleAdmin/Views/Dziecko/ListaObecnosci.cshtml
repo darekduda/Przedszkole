@@ -1,0 +1,47 @@
+﻿@model PrzedszkoleAdmin.Models.ListaObecnosciViewModel
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Lista Obecności";
+}
+
+<h1>Lista Obecności</h1>
+
+<h3>Dziecko: @Model.Dziecko.Imie @Model.Dziecko.Nazwisko</h3>
+
+<form method="get" action="@Url.Action("ListaObecnosci", new { id = Model.Dziecko.Id })">
+    <div>
+        <label for="fromDate">Od:</label>
+        <input type="date" name="fromDate" id="fromDate" value="@ViewBag.FromDate">
+
+        <label for="toDate">Do:</label>
+        <input type="date" name="toDate" id="toDate" value="@ViewBag.ToDate">
+
+        <button type="submit">Filtruj</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.FromDate) && !string.IsNullOrEmpty(ViewBag.ToDate) && Model.Obecnosci != null && Model.Obecnosci.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Obecność</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obecnosc in Model.Obecnosci)
+            {
+                <tr>
+                    <td>@obecnosc.Data</td>
+                    <td>@(obecnosc.CzyObecne ? "Obecna/y" : "Nieobecna/y")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrEmpty(ViewBag.FromDate) && !string.IsNullOrEmpty(ViewBag.ToDate))
+{
+    <p>Brak obecności w wybranym zakresie dat.</p>
+}

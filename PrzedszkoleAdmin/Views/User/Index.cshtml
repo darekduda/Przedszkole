@@ -1,32 +1,29 @@
 ﻿@model IEnumerable<PrzedszkoleData.Data.Account.ApplicationUser>
 
+@{
+    ViewData["Title"] = "Index";
+}
+
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-4">
                     <button class="btn btn-primary">
-                        <a asp-action="Create" style="text-align:center; color:white;">Dodaj</a>
-                    </button>
+@*                        <a asp-action="Create" style="text-align:center; color:white;">Dodaj</a>
+*@                    </button>
                 </div>
                 <div class="col-sm-4" style="text-align:center">
                     <h1>Użytkownicy</h1>
                 </div>
                 <div class="col-sm-4" style="text-align:right">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Użytkownicy</li>
-                    </ol>
+                    <button class="btn btn-secondary" onclick="goBack()">Wróć</button>
                 </div>
             </div>
         </div>
     </section>
 
     <div class="card">
-        @*        <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
-        </div>*@
-        <!-- /.card-header -->
         <div class="card-body">
             <br />
             <br />
@@ -37,10 +34,10 @@
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
                         <th>
-                            Imię                        
+                            Imię
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.LastName)
+                            Nazwisko
                         </th>
                         <th>Akcja</th>
                     </tr>
@@ -60,8 +57,131 @@
                                 @Html.DisplayFor(modelItem => item.LastName)
                             </td>
                             <td>
-                                <a class="edit" title="Edit" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons" style="color: #FFC107">&#xE254;</i></a>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#editModal-@item.Id">Edytuj</button>
+                                <button class="btn btn-info" data-toggle="modal" data-target="#detailsModal-@item.Id">Szczegóły</button>
                                 <a class="edit" title="Details" asp-action="Details" asp-route-id="@item.Id"><i class="material-icons" style="color: #0000FF ">&#xe869;</i></a>
+                                <a class="edit" title="AssignChildren" asp-action="AssignChildren" asp-route-id="@item.Id"><i class="material-icons" style="color: #0000FF ">Dziecko</i></a>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="editModalLabel-@item.Id" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editModalLabel-@item.Id">Edytuj:</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form asp-action="Edit" asp-route-id="@item.Id" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="userName">Nazwa użytkownika:</label>
+                                                        <input type="text" class="form-control" id="userName" name="UserName" value="@item.UserName" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email:</label>
+                                                        <input type="text" class="form-control" id="email" name="Email" value="@item.Email" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="firstName">Imię:</label>
+                                                        <input type="text" class="form-control" id="firstName" name="FirstName" value="@item.FirstName" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Nazwisko:</label>
+                                                        <input type="text" class="form-control" id="lastName" name="LastName" value="@item.LastName" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Nazwisko:</label>
+                                                        <input type="text" class="form-control" id="lastName" name="LastName" value="@item.LastName" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="kraj">Kraj:</label>
+                                                        <input type="text" class="form-control" id="kraj" name="Kraj" value="@item.Kraj" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="wojewodztwo">Wojewodztwo:</label>
+                                                        <input type="text" class="form-control" id="wojewodztwo" name="Wojewodztwo" value="@item.Wojewodztwo" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="miasto">Miasto:</label>
+                                                        <input type="text" class="form-control" id="miasto" name="Miasto" value="@item.Miasto" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="kodPocztowy">Kod Pocztowy:</label>
+                                                        <input type="text" class="form-control" id="kodPocztowy" name="KodPocztowy" value="@item.KodPocztowy" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ulica">Ulica:</label>
+                                                        <input type="text" class="form-control" id="ulica" name="Ulica" value="@item.Ulica" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="numerDomu">Numer Domu:</label>
+                                                        <input type="text" class="form-control" id="numerDomu" name="NumerDomu" value="@item.NumerDomu" />
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                                                        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Details Modal -->
+                                <div class="modal fade" id="detailsModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel-@item.Id" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailsModalLabel-@item.Id">Szczegóły:</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="userName">Nazwa użytkownika:</label>
+                                                    <input type="text" class="form-control" id="userName" name="UserName" value="@item.UserName" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstName">Imię:</label>
+                                                    <input type="text" class="form-control" id="firstName" name="FirstName" value="@item.FirstName" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastName">Nazwisko:</label>
+                                                    <input type="text" class="form-control" id="lastName" name="LastName" value="@item.LastName" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="kraj">Kraj:</label>
+                                                    <input type="text" class="form-control" id="kraj" name="Kraj" value="@item.Kraj" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="wojewodztwo">Wojewodztwo:</label>
+                                                    <input type="text" class="form-control" id="wojewodztwo" name="Wojewodztwo" value="@item.Wojewodztwo" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="miasto">Miasto:</label>
+                                                    <input type="text" class="form-control" id="miasto" name="Miasto" value="@item.Miasto" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="kodPocztowy">Kod Pocztowy:</label>
+                                                    <input type="text" class="form-control" id="kodPocztowy" name="KodPocztowy" value="@item.KodPocztowy" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ulica">Ulica:</label>
+                                                    <input type="text" class="form-control" id="ulica" name="Ulica" value="@item.Ulica" disabled />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="numerDomu">Numer Domu:</label>
+                                                    <input type="text" class="form-control" id="numerDomu" name="NumerDomu" value="@item.NumerDomu" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -74,12 +194,30 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
 <script type="text/javascript">
     $('#example').DataTable({
+        language: {
+            search: "Wyszukaj",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            },
+            "zeroRecords": "Nie znaleziono pasujących rekordów",
+            "info": "Wyświetlono _START_ do _END_ z _TOTAL_ rekordów",
+            "infoEmpty": "Wyświetlono 0 rekordów",
+            "infoFiltered": "(filtrowano z _MAX_ rekordów)",
+            info: "Wyświetl _START_ do _END_ z _TOTAL_ elementów",
+            lengthMenu: "Wyświetl _MENU_ elementów"
+        }
     });
 </script>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 
 
